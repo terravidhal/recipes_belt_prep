@@ -56,7 +56,7 @@ def register_process():
     #save new user to db
     user_id = User.create_user(data)
 
-    #save to seesion
+    #save to sesssion
     session["user_id"] = user_id
 
     #save user firstname
@@ -64,6 +64,7 @@ def register_process():
 
     #redirect to dashboard
     return redirect('/dashboard')
+
 
 
 
@@ -117,6 +118,12 @@ def dashboard():
         return redirect("/")
 
     all_recipes = Recipe.get_all()
+
+    # reset session variables
+    session["name"] = ''
+    session["description"] = ''
+    session["instructions"] = ''
+    session["date"] = ''
 
     return render_template("dashboard.html", all_recipes = all_recipes)
 

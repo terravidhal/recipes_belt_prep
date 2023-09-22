@@ -77,6 +77,41 @@ class Recipe:
 
 
 
+
+     # READ
+    # ONE elt
+    # GET RECIPE WITH SPECIFIC USER
+    @classmethod
+    def get_recipe_with_user(cls, data):
+        query = "SELECT * FROM recipes LEFT JOIN users ON recipes.user_id = users.id WHERE recipes.id = %(recipe_id)s;"
+
+        results = connectToMySQL(cls.DB).query_db(query, data)
+
+        specific_recipe_obj = cls(results[0])
+
+
+        for obj in results:
+
+            user_data = {
+                "id" : obj["users.id"],
+                "first_name" : obj["first_name"],
+                "last_name" : obj["last_name"],
+                "email" : obj["email"],
+                "password" : obj["password"],
+                "created_at" : obj["users.created_at"],
+                "updated_at" : obj["users.updated_at"],
+            }
+             
+            user_instance = user.User(user_data)
+
+            specific_recipe_obj.user = user_instance
+
+
+        return specific_recipe_obj
+
+
+
+
     # UPDATE
     @classmethod
     def update_recipe(cls, data):
@@ -130,37 +165,7 @@ class Recipe:
 
 
 
-    # READ
-    # ONE elt
-    # GET RECIPE WITH SPECIFIC USER
-    @classmethod
-    def get_recipe_with_user(cls, data):
-        query = "SELECT * FROM recipes LEFT JOIN users ON recipes.user_id = users.id WHERE recipes.id = %(recipe_id)s;"
-
-        results = connectToMySQL(cls.DB).query_db(query, data)
-
-        specific_recipe_obj = cls(results[0])
-
-
-        for obj in results:
-
-            user_data = {
-                "id" : obj["users.id"],
-                "first_name" : obj["first_name"],
-                "last_name" : obj["last_name"],
-                "email" : obj["email"],
-                "password" : obj["password"],
-                "created_at" : obj["users.created_at"],
-                "updated_at" : obj["users.updated_at"],
-            }
-             
-            user_instance = user.User(user_data)
-
-            specific_recipe_obj.user = user_instance
-
-
-        return specific_recipe_obj
-
+   
 
 
 

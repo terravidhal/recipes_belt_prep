@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.recipe import Recipe
+from datetime import datetime
 
 
 
@@ -90,7 +91,7 @@ def edit_recipe_process(recipe_id):
 
 
     data = {
-        "name": request.form["Nname"],
+        "name": request.form["name"],
         "description": request.form["description"],
         "under_30": session["under_30"],
         "instructions": request.form["instructions"],
@@ -122,7 +123,10 @@ def show_recipe(recipe_id):
 
     recipe = Recipe.get_recipe_with_user(data)
 
-    return render_template("show_recipe.html", specific_recipe = recipe)
+    # date formatting
+    date = datetime.strptime(recipe.date, "%Y-%m-%d").strftime("%B %dth %Y")
+
+    return render_template("show_recipe.html", specific_recipe = recipe, date_formatting = date)
 
 
 
