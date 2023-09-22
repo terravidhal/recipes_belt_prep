@@ -66,7 +66,6 @@ class User:
 
 # others Methods
     
-
     # CREATE NEW USER
     @classmethod
     def create_user(cls, data):

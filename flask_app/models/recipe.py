@@ -50,7 +50,6 @@ class Recipe:
     
 
 
-
 # others Methods
 
     # CREATE NEW RECIPE
@@ -58,58 +57,21 @@ class Recipe:
     def create_recipe(cls, data):
         query = "INSERT INTO recipes (name, description, under_30, instructions, date, created_at,  user_id) VALUES (%(name)s, %(description)s, %(under_30)s, %(instructions)s,  %(date)s, NOW(), %(user_id)s)"
         results = connectToMySQL(cls.DB).query_db(query,data)
-        #returns the ID of the new recipe
-        recipe_id_created = results
-        return recipe_id_created 
+        recipe_id_created = results  # 
+        return recipe_id_created # Create returns the ID of the new recipe
     
     
 
     # # READ
     # # ONE elt
-    # @classmethod
-    # def get_one(cls, data):
-    #     query  = "SELECT * FROM recipes WHERE id = %(id)s;"
-
-    #     results = connectToMySQL(cls.DB).query_db(query, data)
-
-    #     return cls(results[0])
-    
-
-
-
-
-     # READ
-    # ONE elt
-    # GET RECIPE WITH SPECIFIC USER
     @classmethod
-    def get_recipe_with_user(cls, data):
-        query = "SELECT * FROM recipes LEFT JOIN users ON recipes.user_id = users.id WHERE recipes.id = %(recipe_id)s;"
+    def get_one(cls, data):
+        query  = "SELECT * FROM recipes WHERE id = %(recipe_id)s;"
 
         results = connectToMySQL(cls.DB).query_db(query, data)
 
-        specific_recipe_obj = cls(results[0])
-
-
-        for obj in results:
-
-            user_data = {
-                "id" : obj["users.id"],
-                "first_name" : obj["first_name"],
-                "last_name" : obj["last_name"],
-                "email" : obj["email"],
-                "password" : obj["password"],
-                "created_at" : obj["users.created_at"],
-                "updated_at" : obj["users.updated_at"],
-            }
-             
-            user_instance = user.User(user_data)
-
-            specific_recipe_obj.user = user_instance
-
-
-        return specific_recipe_obj
-
-
+        return cls(results[0])
+    
 
 
     # UPDATE
@@ -119,7 +81,7 @@ class Recipe:
 
         results = connectToMySQL(cls.DB).query_db(query, data)
 
-        return  #update queries don't return anything 
+        return  # update queries don't return anything 
 
 
 
@@ -130,7 +92,7 @@ class Recipe:
 
         results = connectToMySQL(cls.DB).query_db(query, data)
 
-        return
+        return  # delete queries don't return anything
 
 
 

@@ -49,20 +49,14 @@ def register_process():
         session["email"] = request.form["email"]
         return redirect("/register")
     
-
-    #bcrypt password
     data["psswrd"] =  bcrypt.generate_password_hash(request.form['password'])
 
-    #save new user to db
     user_id = User.create_user(data)
 
-    #save to sesssion
     session["user_id"] = user_id
 
-    #save user firstname
     session["firstname"] = request.form["firstname"] 
 
-    #redirect to dashboard
     return redirect('/dashboard')
 
 
@@ -77,7 +71,6 @@ def login_page():
         return redirect ("/dashboard")
    
    return render_template("login.html")
-
 
 
 

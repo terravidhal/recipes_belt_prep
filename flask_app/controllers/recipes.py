@@ -71,7 +71,7 @@ def edit_recipe(recipe_id):
         "recipe_id" : recipe_id
     }
 
-    recipe = Recipe.get_recipe_with_user(data)
+    recipe = Recipe.get_one(data)
 
     return render_template("edit_recipe.html", specific_recipe = recipe)
 
@@ -121,13 +121,13 @@ def show_recipe(recipe_id):
         "recipe_id" : recipe_id
     }
 
-    recipe = Recipe.get_recipe_with_user(data)
+    
+    recipe = Recipe.get_one(data)
 
     # date formatting
     date = datetime.strptime(recipe.date, "%Y-%m-%d").strftime("%B %dth %Y")
 
     return render_template("show_recipe.html", specific_recipe = recipe, date_formatting = date)
-
 
 
 
