@@ -188,7 +188,7 @@ label{
    margin-left: 0 !important;
   }
   .content-right input[type="radio"]{
-    width: 5%;
+    width: 40%;
     border-radius: 50%;
     height: 25px;
   }
@@ -198,7 +198,7 @@ label{
   .content-right button[type="submit"]{
     margin: 10px 0 0 140px;
   }
-
+ 
   /**** SHOW RECIPE ***/
 
   .content-infos h6{

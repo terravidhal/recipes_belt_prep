@@ -47,12 +47,20 @@
                 <div class="form-row my-4">
                     <p>Under 30 minutes?</p>
                     <div class="radio-input d-flex">
-                        <div class="form-group col-md-12">
-                            <input type="radio" class="form-control" name="under_30" value="yes"  id="yes">
+                        <div class="form-group col-md-12 form-check">
+                            {% if specific_recipe.under_30 == 'yes'  %}
+                            <input type="radio"  name="under_30" value="yes"  id="yes" checked >
+                            {% else %}
+                            <input type="radio"  name="under_30" value="yes"  id="yes">
+                            {% endif %}
                             <label  for="yes">Yes</label>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="radio" class="form-control" name="under_30" value="no" id="no">
+                            {% if specific_recipe.under_30 == 'no' %}  
+                            <input type="radio"  name="under_30" value="no" id="no" checked >
+                            {% else %}
+                            <input type="radio"  name="under_30" value="no" id="no">
+                            {% endif %}
                             <label  for="no">No</label>
                         </div>
                     </div>
